@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fy.dailypaper.mapper.DailypaperMapper">
+
+    <resultMap id="BaseResultMap" type="com.fy.dailypaper.entity.Dailypaper">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="uid" column="uid" jdbcType="INTEGER"/>
+            <result property="headline" column="headline" jdbcType="VARCHAR"/>
+            <result property="task" column="task" jdbcType="VARCHAR"/>
+            <result property="problem" column="problem" jdbcType="VARCHAR"/>
+            <result property="harvest" column="harvest" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        uid,headline,
+        task,problem,harvest
+    </sql>
+    <insert id="add">
+        insert into dailypaper
+                    <include refid="Base_Column_List"></include>
+        values (#{uid},#{headline},#{task}, #{problem},#{problem},#{harvest})
+    </insert>
+    <select id="selectAll" resultType="com.fy.dailypaper.entity.Dailypaper">
+        select * from  dailypaper
+    </select>
+
+</mapper>

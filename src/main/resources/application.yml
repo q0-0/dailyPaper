@@ -1,0 +1,105 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    # 数据库连接信息
+    url: jdbc:mysql://localhost:3306/daily
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Qfy_0000
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #Druid配置信息
+      initial-size: 15 #初始化链接数量
+      max-active: 100 #最大链接数量
+      min-idle: 15 #最小的连接数量
+      max-wait: 60000  #最长的等待时间
+      # 配置DruidStatFilter 作用：统计作用
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      # 配置DruidStatViewServlet 作用：显示统计页面
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+        #  禁用HTML页面上的“Reset All”功能
+        reset-enable: false
+        # 登录名
+        login-username: admin
+        # 登录密码
+        login-password: zzjava
+        # 新版需要配置这个属性才能访问监控页面
+        enabled: true
+
+  #json格式化全局配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: NON_NULL
+
+  mvc:
+    view:
+      # 视图的前缀
+      prefix: /WEB-INF/
+      # 视图的后缀
+      suffix: .jsp
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+    #解决springboot与Swagger冲突
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+  #邮件
+  mail:
+    username: 562085693@qq.com
+    #授权码
+    password: pivkjvpjvzfobdea
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+    port: 465
+    protocol: smtp
+    default-encoding: UTF-8
+
+  redis:
+    host: 121.40.147.134
+    port: 6380
+    password: Qfy_0000
+    lettuce:
+      pool:
+        max-active: 8 #最大连接
+        max-idle: 8 #最大空闲连接
+        min-idle: 0 #最小空闲连接
+        max-wait: 100 #连接等待时间
+
+# 配置mybatis
+mybatis:
+  # mapper.xml 文件的位置
+  mapper-locations: mapper/*.xml
+  # 配置实体列的别名
+  type-aliases-package: com.fy.carlikeboot.entity
+  configuration:
+    # 数据库表的字段下划线转java类中的属性驼峰名字
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+
+logging:
+  pattern:
+    file: '%clr(%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n)' #日志文件的日志格式
+  level:
+    root: info #root日志以INFO级别输出
+  file:
+    path: /app/logs   #日志输出路径
+    name: demo.log	 #指定日志文件名
+
