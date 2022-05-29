@@ -20,7 +20,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Resource
     private  UserMapper mapper;
 
-    //根据名字查询
+    //根据名字查询 登陆
     @Override
     public User queryByName(String name) {
         if (StringUtils.isNoyEmpty(name)){
